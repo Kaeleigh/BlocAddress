@@ -21,4 +21,13 @@ class AddressBook
     # #11 insert new entry into entries array using calculated index
     entries.insert(index, Entry.new(name, phone_number, email))
   end
+
+  def remove_entry(name, phone_number, email)
+    
+    entries.each_with_index do |index, entry|
+      if name == entry.name
+      entries.delete_at(index)
+      end
+    end
+  end
 end
