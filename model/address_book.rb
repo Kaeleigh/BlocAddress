@@ -1,5 +1,6 @@
 # #8 creates a file path to entry class
 require_relative 'entry.rb'
+require "csv"
 
 class AddressBook
   attr_reader :entries
@@ -27,4 +28,17 @@ class AddressBook
       entries.delete_at(index) and break if name == entry.name
     end
   end
+
+  def import_from_csv(file_name)
+    # #7 reads file, csv class used to parse the file and produce object csv table
+    csv_text = File.read(file_name)
+    csv = CSV.parse(csv_text, headers: true, skip_blanks: true)
+    # #8 loop over the csv table rows, create a hash for each row and convert into an entry thru add_entry which adds entry to book
+    csv.each do |row|
+      row_hash = row.to_hash
+      add_entry(row_hash["name"], row_hash["phone_number"], row_hash["email"])
+    end
+  end
+
+  # # ends entire class
 end
