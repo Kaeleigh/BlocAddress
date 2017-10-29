@@ -65,5 +65,13 @@ class AddressBook
     # #5 if no match found return nil
     return nil
   end
+
+  # # iterative search method
+  def iterative_search(name)
+    # #loop through the array of entries, return entry if searching name = name in array
+    entries.each { |entry| return entry if entry.name == name }
+    # #5 if no match found return nil
+    return nil
+  end
   # # ends entire class
 end
