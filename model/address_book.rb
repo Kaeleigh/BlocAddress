@@ -40,5 +40,30 @@ class AddressBook
     end
   end
 
+  # search AddressBook for a specific entry by name
+  def binary_search(name)
+    # #1 save the index of first item to var lower, last item to upper
+    lower = 0
+    upper = entries.length - 1
+
+    # #2 loop while lower index is <= to upper index
+    while lower <= upper
+      # #3 find middle index thru sum of lower and upper and % by two and store into mid_name
+      mid = (lower + upper) / 2
+      mid_name = entries[mid].name
+
+      # #4 compare search name to middle index name using ==
+      if name == mid_name
+        return entries[mid]
+      elsif name < mid_name
+        upper = mid - 1
+      elsif name > mid_name
+        lower = mid + 1
+      end
+    end
+
+    # #5 if no match found return nil
+    return nil
+  end
   # # ends entire class
 end
