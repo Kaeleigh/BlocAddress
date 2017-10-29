@@ -15,7 +15,7 @@ class MenuController
     puts "2 - Create an entry"
     puts "3 - Search for an entry"
     puts "4 - Import entries from a CSV"
-    puts "5 - View Entry Number"
+    puts "5 - Nuke all entries"
     puts "6 - Exit"
     print "Enter your selection: "
 
@@ -42,7 +42,8 @@ class MenuController
         main_menu
       when 5
         system "clear"
-        view_entry_number
+        @address_book.nuke
+        puts "Entries have been nuked!"
         main_menu
       when 6
         puts "Good-bye"
@@ -56,23 +57,9 @@ class MenuController
     end
   end
 
-  # # view specific entry method
-  def view_entry_number
-    print "Enter entry number: "
-    selection = gets.chomp.to_i
-
-    if selection < @address_book.entries.count
-      puts @address_book.entries[selection]
-      puts "Hit enter to return to main menu"
-      gets.chomp
-      system "clear"
-    else
-      puts "#{selection} is not a valid entry number"
-      view_entry_number
-    end
-  end
-
   # # menu options defined
+
+  # # view all entries method
   def view_all_entries
     # # loops through all entries in Address Book
     address_book.entries.each do |entry|
@@ -210,7 +197,7 @@ class MenuController
      # # save user input to selection
      selection = gets.chomp
 
-     # # takes specific action based on input 
+     # # takes specific action based on input
      case selection
        when "d"
          system "clear"
